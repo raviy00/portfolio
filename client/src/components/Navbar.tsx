@@ -24,6 +24,7 @@ export default function Navbar({ activeSection = 'home', onNavClick }: NavbarPro
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    const currentPath = window.location.pathname;
 
     // Handle page routes (starting with /)
     if (href.startsWith('/')) {
@@ -33,10 +34,18 @@ export default function Navbar({ activeSection = 'home', onNavClick }: NavbarPro
     }
 
     // Handle anchor links (starting with #)
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-      onNavClick?.(href.slice(1));
+    // If not on home page, navigate to home first
+    if (currentPath !== '/' && currentPath !== '') {
+      // Store the anchor in session storage to scroll after navigation
+      sessionStorage.setItem('scrollTarget', href);
+      window.location.href = '/';
+    } else {
+      // Already on home page, just scroll
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        onNavClick?.(href.slice(1));
+      }
     }
   };
 

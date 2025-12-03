@@ -113,6 +113,21 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
 
+  // Handle scroll target from session storage (when navigating from other pages)
+  useEffect(() => {
+    const scrollTarget = sessionStorage.getItem('scrollTarget');
+    if (scrollTarget) {
+      const timer = setTimeout(() => {
+        const element = document.querySelector(scrollTarget);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+        sessionStorage.removeItem('scrollTarget');
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
 
@@ -411,7 +426,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <Section3DTransition sectionId="contact" delay={0.6}>
-      <section className="py-12 sm:py-16 md:py-20 bg-card/50 relative z-10 px-3 sm:px-4 md:px-6">
+      <section id="contact" className="py-12 sm:py-16 md:py-20 bg-card/50 relative z-10 px-3 sm:px-4 md:px-6">
         <div className="container">
           <h2 className="section-title mb-6 sm:mb-8 md:mb-12">{t.getInTouch}</h2>
           <ContactForm />
