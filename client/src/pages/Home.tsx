@@ -389,6 +389,26 @@ export default function Home() {
       <NewsletterSignup />
       </Section3DTransition>
 
+      {/* CV Download Section */}
+      <Section3DTransition sectionId="cv" delay={0.595}>
+      <section className="py-12 sm:py-16 md:py-20 relative z-10 px-3 sm:px-4 md:px-6">
+        <div className="container max-w-2xl">
+          <div className="text-center space-y-6 md:space-y-8">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-widest mb-3 md:mb-4">Grab My CV</h2>
+              <p className="text-base md:text-lg text-muted-foreground">Download my comprehensive resume and explore my full professional background, skills, and achievements.</p>
+            </div>
+            <button
+              onClick={() => window.open('https://drive.google.com/uc?export=download&id=1Eexn1ZIqmpmraYXSHcYbKJAC47voOP0v', '_blank')}
+              className="btn-primary inline-block text-center text-base md:text-lg py-3 md:py-4 px-8 md:px-12 hover:scale-105 transition-transform duration-300"
+            >
+              📥 Download CV
+            </button>
+          </div>
+        </div>
+      </section>
+      </Section3DTransition>
+
       {/* Contact Section */}
       <Section3DTransition sectionId="contact" delay={0.6}>
       <section className="py-12 sm:py-16 md:py-20 bg-card/50 relative z-10 px-3 sm:px-4 md:px-6">
